@@ -1,0 +1,67 @@
+{
+  "format": 1,
+  "restore": {
+    "/home/deck/Documents/Banana-ify-Mod/Image-ify.csproj": {}
+  },
+  "projects": {
+    "/home/deck/Documents/Banana-ify-Mod/Image-ify.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/deck/Documents/Banana-ify-Mod/Image-ify.csproj",
+        "projectName": "Image-ify",
+        "projectPath": "/home/deck/Documents/Banana-ify-Mod/Image-ify.csproj",
+        "packagesPath": "/home/deck/.nuget/packages/",
+        "outputPath": "/home/deck/Documents/Banana-ify-Mod/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/deck/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "targetAlias": "netstandard2.1",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "NETStandard.Library": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/home/deck/.dotnet/sdk/9.0.301/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
