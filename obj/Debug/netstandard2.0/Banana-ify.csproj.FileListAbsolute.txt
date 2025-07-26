@@ -1,5 +1,0 @@
-C:\Users\uwusu\source\repos\Banana-ify\obj\Debug\netstandard2.0\Banana-ify.csproj.AssemblyReference.cache
-C:\Users\uwusu\source\repos\Banana-ify\obj\Debug\netstandard2.0\Banana-ify.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\uwusu\source\repos\Banana-ify\obj\Debug\netstandard2.0\Banana-ify.AssemblyInfoInputs.cache
-C:\Users\uwusu\source\repos\Banana-ify\obj\Debug\netstandard2.0\Banana-ify.AssemblyInfo.cs
-C:\Users\uwusu\source\repos\Banana-ify\obj\Debug\netstandard2.0\Banana-ify.csproj.CoreCompileInputs.cache
