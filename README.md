@@ -17,3 +17,7 @@
   4. Drop your awesome image into your game path (Gorilla Tag/BepInEx/plugins/Image-ify/)
 
   5. Lastly, have fun! :D
+
+
+# Things you should probably know
+When you put your own image it doesnt have to have the same name :D
