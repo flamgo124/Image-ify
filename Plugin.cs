@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Collections;
 using UnityEngine;
 using BepInEx;
 
@@ -12,6 +13,8 @@ namespace Image_ify
     {
         private string imageFolder;
         private string selectedTexturePath;
+        private Texture2D currentTexture;
+        private GameObject closestObject;
         void Awake()
         {
             imageFolder = Path.Combine(Paths.PluginPath, "Image-ify");
@@ -55,41 +58,67 @@ namespace Image_ify
         {
             if (string.IsNullOrEmpty(selectedTexturePath))
                 return;
-            ApplyTextureToAllObjects();
-            InvokeRepeating("UpdateTextures", 0f, 2f);
+
+            LoadTexture();
+            StartCoroutine(UpdateTextureClosestToPlayer());
         }
-        void UpdateTextures()
+        void LoadTexture()
         {
             if (string.IsNullOrEmpty(selectedTexturePath) || !File.Exists(selectedTexturePath))
             {
                 Debug.LogError($"Texture file not found at: {selectedTexturePath}");
                 return;
             }
-            Texture2D newTexture = new Texture2D(2, 2);
-            newTexture.LoadImage(File.ReadAllBytes(selectedTexturePath));
-            ApplyTextureToAllObjects(newTexture);
+            currentTexture = new Texture2D(2, 2);
+            currentTexture.LoadImage(File.ReadAllBytes(selectedTexturePath));
         }
-        void ApplyTextureToAllObjects(Texture2D texture = null)
+        IEnumerator UpdateTextureClosestToPlayer()
         {
-            if (texture == null)
+            while (true)
             {
-                if (string.IsNullOrEmpty(selectedTexturePath) || !File.Exists(selectedTexturePath))
+                if (currentTexture == null)
                 {
-                    Debug.LogError($"Texture file not found at: {selectedTexturePath}");
-                    return;
+                    yield return new WaitForSeconds(0.05f);
+                    continue;
                 }
-                texture = new Texture2D(2, 2);
-                texture.LoadImage(File.ReadAllBytes(selectedTexturePath));
-            }
-            GameObject[] allObjects = FindObjectsOfType<GameObject>();
-            foreach (GameObject obj in allObjects)
-            {
-                Renderer renderer = obj.GetComponent<Renderer>();
-                if (renderer != null)
+
+                GameObject player = GorillaTagger.Instance?.gameObject;
+                if (player == null)
                 {
-                    renderer.material = new Material(renderer.material) { mainTexture = texture };
-                    Debug.Log($"Texture applied to {obj.name}");
+                    yield return new WaitForSeconds(0.05f);
+                    continue;
                 }
+
+                var allObjects = FindObjectsOfType<GameObject>();
+                float closestDist = float.MaxValue;
+                GameObject closest = null;
+                Vector3 playerPos = player.transform.position;
+
+                foreach (var obj in allObjects)
+                {
+                    Renderer rend = obj.GetComponent<Renderer>();
+                    if (rend == null) continue;
+
+                    float dist = Vector3.Distance(playerPos, obj.transform.position);
+                    if (dist < closestDist)
+                    {
+                        closestDist = dist;
+                        closest = obj;
+                    }
+                }
+
+                if (closest != null && closest != closestObject)
+                {
+                    closestObject = closest;
+                    Renderer rend = closestObject.GetComponent<Renderer>();
+                    if (rend != null)
+                    {
+                        rend.material = new Material(rend.material) { mainTexture = currentTexture };
+                        Debug.Log($"Applied texture to closest object: {closestObject.name}");
+                    }
+                }
+
+                yield return new WaitForSeconds(0.05f);
             }
         }
     }
