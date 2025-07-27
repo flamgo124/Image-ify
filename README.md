@@ -20,4 +20,5 @@
 
 # Things you should probably know
 When you put your own image it doesnt have to have the same name :D
+
 Your game WILL be ~1 fps on start up for a long while
